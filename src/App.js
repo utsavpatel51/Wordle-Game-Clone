@@ -4,7 +4,7 @@ import BlockRow from "./component/BlockRow";
 import Grid from "./component/Grid";
 import Modal from "./component/Modal";
 import useWordle from "./hooks/useWordle";
-import wordData from "./data/db.json";
+// import wordData from "./data/db.json";
 
 function App() {
 	let solution = "PAIN";
