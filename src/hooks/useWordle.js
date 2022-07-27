@@ -1,5 +1,7 @@
 import { useState } from "react";
 
+let gameTry = { num: 0 }
+
 const useWordle = (solution, MAX_GUESS) => {
 	const [currentTry, setCurrentTry] = useState(0);
 	const [isCorrect, setIsCorrect] = useState(false);
@@ -15,6 +17,8 @@ const useWordle = (solution, MAX_GUESS) => {
 			setCurrentGuess("");
 			setPastGuesses([...Array(MAX_GUESS)]);
 		}, 320);
+		gameTry.num++;
+		console.log(gameTry);
 	};
 	const formatGuess = (guess) => {
 		let solutionChars = [...solution];
@@ -91,6 +95,7 @@ const useWordle = (solution, MAX_GUESS) => {
 		isGameOver,
 		handleKeyUp,
 		restartGame,
+		gameTry
 	};
 };
 

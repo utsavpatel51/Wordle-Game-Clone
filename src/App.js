@@ -4,10 +4,12 @@ import BlockRow from "./component/BlockRow";
 import Grid from "./component/Grid";
 import Modal from "./component/Modal";
 import useWordle from "./hooks/useWordle";
+var randomWords = require('random-words');
 // import wordData from "./data/db.json";
 
+let solution = "ABCD"
+
 function App() {
-	let solution = "PAIN";
 	// useEffect(() => {
 	// 	solution =
 	// 		wordData.letters[
@@ -24,8 +26,9 @@ function App() {
 		isGameOver,
 		handleKeyUp,
 		restartGame,
+		gameTry
 	} = useWordle(solution, MAX_GUESS);
-
+	// console.log(gameTry.num);
 	useEffect(() => {
 		window.addEventListener("keyup", handleKeyUp);
 		if (isCorrect || currentTry >= MAX_GUESS) {
@@ -33,6 +36,16 @@ function App() {
 		}
 		return () => window.removeEventListener("keyup", handleKeyUp);
 	}, [handleKeyUp, currentTry, isCorrect]);
+
+	useEffect(() => {
+		solution = randomWords({ exactly: 1, formatter: (word) => word.toUpperCase(), maxLength: 4 })[0];
+
+		while (solution.length !== 4) {
+			solution = randomWords({ exactly: 1, formatter: (word) => word.toUpperCase(), maxLength: 4 })[0];
+		}
+		// console.log(gameTry)
+		// console.log(solution)
+	}, [gameTry.num])
 
 	return (
 		<section>
